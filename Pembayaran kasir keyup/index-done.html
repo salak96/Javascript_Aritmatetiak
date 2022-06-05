@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            h1 {
+                text-align: center;
+            }
+            p {
+                font-family: verdana;
+                font-size: 20px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Penjualan</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+    </head>
+
+    <body>
+
+        <script type="text/javascript">
+            var i = 1;
+        </script>
+
+        <center>
+            <img src="https://www.lokerjogja.id/wp-content/uploads/2022/03/Lowongan-Kerja-Google-Ads-Specialist-Web-Developer-Manual-Tester-Partnership-Rekrutmen-Spesialis-Android-Developer-Ilustrator-di-PT.-Nusantara-Berkah-Digital-Nutapos-100x87.png"
+            alt="nuta logo" width="50" height="50">
+            <h6>TES FRONTEND WEB DEVELOPER</h6>
+        </center>
+
+        <br>
+        <br>
+
+        <div class="container">
+            <div class="container-fluid">
+
+                <form method='post' action="simpan">
+
+                <div class="form-group row">
+                    <label for="namaPelanggan" class="col-sm-2 form-label text-right">Nama Pelanggan</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="namaPelanggan" placeholder="Nama Pelanggan">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="tanggal" class="col-sm-2 form-label text-right">Tanggal</label>
+                    <div class="col-sm-3">
+                        <!-- 1. Ketika icon pada field tanggal diklik maka muncul kalender untuk mengatur tanggal -->
+                        <input type="date" class="form-control" id="tanggal" placeholder="Tanggal">
+                    </div>
+                    <label for="waktu" class="col-sm-1 form-label text-right">Jam</label>
+                    <div class="col-sm-2">
+                        <!-- 1. Ketika icon pada field tanggal diklik maka muncul kalender untuk mengatur tanggal -->
+                        <input type="time" class="form-control" id="jam" placeholder="Waktu">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 form-label text-right">Item yang dijual</label>
+                    <!-- tabel -->
+                    <div class="col-sm-10 align-self-end">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="box">
+                                    <div class="box-body table-responsive">
+                                        <table class="table table-stripped table-bordered table-penjualan">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Qty</th>
+                                                    <th>Harga Satuan</th>
+                                                    <th>Sub Total</th>
+                                                    <th>&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="detailItem">
+                                                <tr id="baris1">
+                                                    <td class="col-3">
+                                                        <select class="form-control" id="item[1]">
+                                                            <option value="">-</option>
+                                                            <option value="INDOMIE">INDOMIE</option>
+                                                            <option value="KEJU">KEJU</option>
+                                                            <option value="ROTI">ROTI</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="col-2">
+                                                        <input type="number" class="form-control angka" id="qty[1]" placeholder="Qty" onkeyup="hitungTotal(1)">
+                                                    </td>
+                                                    <td class="col-2">
+                                                        <input type="number" class="form-control angka" id="harga[1]" placeholder="Harga" onkeyup="hitungTotal(1)">
+                                                    </td>
+                                                    <td class="col-2">
+                                                        <input type="number" class="form-control" id="subtotal[1]" placeholder="Sub Total" readonly="readonly">
+                                                    </td>
+                                                    <td class="col-2">
+                                                        <button type="button" class="btn btn-danger" onclick="hapusBaris(1)">Hapus</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-outline-primary" onclick="tambahBaris()">+ Tambah Item Lain</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tabel -->
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-10 form-label text-right">Total</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="total" placeholder="Total" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="form-group row"> 
+                    <label class="col-sm-10 form-label text-right">Bayar Tunai</label> 
+                    <div class="col-sm-2"> 
+                        <input type="text" class="form-control angka" id="bayar" placeholder="Bayar" onkeyup="hitungKembali()"> 
+                    </div> 
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-10 form-label text-right">Kembali</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="kembali" placeholder="Kembali" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12 text-right">
+                        <button type="reset" class="btn btn-danger">Cancel</button>
+                        <button type="button" class="btn btn-warning" onclick="simpan()">Simpan</button>
+                    </div>
+                </div>
+
+                <!-- modal -->
+                <!-- /modal -->
+
+                </form>
+
+            </div>
+        </div>
+        <!-- /container -->
+
+        <script>
+
+
+        /**
+         * 2. Qty dan harga satuan hanya boleh diisi angka (bisa desimal)
+         */
+         $('.angka').keypress(function(e) {  
+            var key = e.charCode || e.keyCode|| 0;  
+            if (key == 8) return true;  
+            key = String.fromCharCode(key);  
+            var regex = /[0-9]|\./;  
+            return regex.test(key);  
+        });
+        /**
+         * 7. Jika user menekan icon tong sampah, maka baris tersebut akan terhapus
+         */
+        function hapusBaris(index)
+        {
+    		$('#baris'+index).remove();
+            hitungTotal();
+            hitungKembali();
+    	}
+
+
+        /**
+         * 6. Jika user menekan “tambah item lain”, maka akan muncul baris baru
+         */
+        function tambahBaris()
+        {
+            ++i;
+            $('#detailItem').append(
+                `
+                <tr id="baris`+i+`">
+                    <td class="col-3">
+                        <select class="form-control" id="item[`+i+`]">
+                            <option value="">-</option>
+                            <option value="INDOMIE">INDOMIE</option>
+                            <option value="KEJU">KEJU</option>
+                            <option value="ROTI">ROTI</option>
+                        </select>
+                    </td>
+                    <td class="col-2">
+                        <input type="number" class="form-control angka" id="qty[`+i+`]" placeholder="Qty" onkeyup="hitungTotal(`+i+`)">
+                    </td>
+                    <td class="col-2">
+                        <input type="number" class="form-control angka" id="harga[`+i+`]" placeholder="Harga" onkeyup="hitungTotal(`+i+`)">
+                    </td>
+                    <td class="col-2">
+                        <input type="number" class="form-control" id="subtotal[`+i+`]" placeholder="Sub Total" readonly="readonly">
+                    </td>
+                    <td class="col-2">
+                        <button type="button" class="btn btn-danger" onclick="hapusBaris(`+i+`)">Hapus</button>
+                    </td>
+                </tr>
+                `
+            );
+        }
+
+
+        /**
+         * 4. Setiap kali user mengetik di kolom Qty maupun harga satuan, otomatis kolom SubTotal dan field Total terupdate
+         */
+        function hitungTotal(index = 1)
+        {
+            var qty = document.getElementById('qty['+index+']');
+            var harga = document.getElementById('harga['+index+']');
+            var subtotal = document.getElementById('subtotal['+index+']');
+            var total = document.getElementById('total');
+
+            if (subtotal != null)
+                subtotal.value = 0;
+
+            if (qty != null && harga != null && qty.value != '' && harga.value != '') {
+                subtotal.value = parseFloat(qty.value) * parseFloat(harga.value);
+            }
+
+            var totalval = 0;
+            for (var j = 1; j <= i; j++) {
+                subtotal = document.getElementById("subtotal["+j+"]");
+                if (subtotal == null)
+                    continue;
+                totalval += parseFloat(subtotal.value);
+            }
+            total.value = totalval;
+            hitungKembali();
+        }
+
+
+        /**
+         * 5. Setiap kali user mengetik di field Bayar Tunai, otomatis fied Kembali terupdate
+         */
+        function hitungKembali()
+        {
+            var total = document.getElementById('total');
+            var bayar = document.getElementById('bayar');
+            var kembali = document.getElementById('kembali');
+
+            if (bayar != null) {
+                if (bayar.value != '') {
+                    kembali.value = parseFloat(bayar.value) - parseFloat(total.value);
+                }
+            }
+
+        }
+
+
+        /**
+         * 8. Jika user menekan tombol simpan, maka muncul Alert inputan user dalam format json
+         */
+        function simpan()
+        {
+
+            // check nama pelanggan tidak boleh kosong
+            var namaPelanggan = document.getElementById('namaPelanggan');
+            if (namaPelanggan == null || namaPelanggan.value == '') {
+                alert('Nama Pelanggan harus diisi !');
+                return;
+            }
+
+            // check tanggal tidak boleh kosong
+            var tanggal = document.getElementById('tanggal');
+            if (tanggal == null || tanggal.value == '') {
+                alert('Tanggal harus diisi !');
+                return;
+            }
+
+            // check jam tidak boleh kosong
+            var jam = document.getElementById('jam');
+            if (jam == null || jam.value == '') {
+                alert('Jam harus diisi !');
+                return;
+            }
+
+            // check item, qty, harga tidak boleh kosong
+            var penjualan = [];
+            var detil = {};
+            for (var j = 1; j <= i; j++) {
+                var item = document.getElementById('item['+j+']');
+                var qty = document.getElementById('qty['+j+']');
+                var harga = document.getElementById('harga['+j+']');
+                if (item != null) {
+                    if (item.value == '') {
+                        alert('Item harus diisi !');
+                        return;
+                    }
+                }
+                if (qty != null) {
+                    if (qty.value == '' || parseFloat(qty.value) == 0) {
+                        alert('Qty harus diisi dan tidak boleh 0 !');
+                        return;
+                    }
+                }
+                if (harga != null) {
+                    if (harga.value == '' || parseFloat(harga.value) == 0) {
+                        alert('Harga harus diisi dan tidak boleh 0 !');
+                        return;
+                    }
+                }
+                if (item != null && qty != null && harga != null && item.value != '' && qty.value != '' && parseFloat(qty.value) != 0 && harga.value != '' && parseFloat(harga.value) != 0) {
+                    detil = {
+                        Item: item.value,
+                        Qty: qty.value,
+                        HargaSatuan: harga.value,
+                        SubTotal: qty.value * harga.value
+                    };
+                    penjualan.push(detil);
+                }
+
+            }
+
+            // check total tidak boleh kosong
+            var total = document.getElementById('total');
+            if (total == null || total.value == '' || parseFloat(total.value) == 0) {
+                alert('Belum ada transaksi !');
+                return;
+            }
+
+            // check bayar tidak boleh kosong
+            var bayar = document.getElementById('bayar');
+            if (bayar == null || bayar.value == '' || parseFloat(bayar.value) == 0) {
+                alert('Pembayaran harus diisi dan tidak boleh 0 !');
+                return;
+            }
+
+            // check "kembali" tidak boleh minus
+            var kembali = document.getElementById('kembali');
+            if (kembali == null || kembali.value == '' || parseFloat(kembali.value) < 0) {
+                alert('Pembayaran kurang !');
+                return;
+            }
+
+            // alert json format
+            var output = {
+                NamaPelanggan: namaPelanggan.value,
+                Tanggal: tanggal.value,
+                Jam: jam.value,
+                Total: total.value,
+                BayarTunai: bayar.value,
+                Kembali: kembali.value,
+                DetilPenjualan: penjualan
+            };
+            alert(JSON.stringify(output));
+
+        }
+
+
+        </script>
+
+    </body>
+
+</html>

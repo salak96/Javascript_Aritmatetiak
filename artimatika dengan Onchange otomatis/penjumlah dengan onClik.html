@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan</title>
+    <!-- cdn jquery -->
+   
+    <!-- cdn bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- cdn font awesome -->
+</head>
+
+<body>
+    <div class="perhitungan">
+        <input type="text" id="bil1">+
+        <input type="text" id="bil2">=
+        <input type="text" id="hasil">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(".perhitungan").keyup(function () {
+            var bil1 = parseInt($("#bil1").val());
+            var bil2 = parseInt($("#bil2").val());
+            
+            var hasil = bil1 + bil2;
+            $("#hasil").attr("value", hasil);
+
+        });
+    </script>
+</body>
+
+</html>
